@@ -10,6 +10,7 @@
       src="https://kit.fontawesome.com/a7145b8385.js"
       crossorigin="anonymous"
     ></script>
+    <script src="./script.js" defer></script>
   </head>
   <body>
     <nav>
@@ -20,15 +21,19 @@
     <section>
       <div class="notes">
         <div class="note_top-bar">
-          <div class="note_image"></div>
+          <div class="note_image">M</div>
           <div class="note_interaction">
             <button><i class="fa-solid fa-plus"></i></button>
             <button><i class="fa-solid fa-trash"></i></button>
           </div>
         </div>
-        <div class="note_title">Hello</div>
+        <div class="line-break"></div>
         <div class="note_content">
-          <textarea name="text-area" id="user-text"></textarea>
+          <textarea
+            name="text-area"
+            id="user-text"
+            placeholder="Type your notes here"
+          ></textarea>
           <div class="note_down_interaction">
             <i class="fa-solid fa-angle-up"></i>
           </div>
