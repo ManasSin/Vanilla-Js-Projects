@@ -14,17 +14,19 @@
   </head>
   <body>
     <nav>
-      <button class="nav-items">Reload</button>
-      <button class="nav-items">Add Notes</button>
-      <button class="nav-items">Delete All</button>
+      <button id="reload" class="nav-items">Reload</button>
+      <button id="add-note" class="nav-items">Add Notes</button>
+      <button id="delete-all" class="nav-items">Delete All</button>
     </nav>
-    <section>
+    <section id="main__section">
       <div class="notes">
         <div class="note_top-bar">
           <div class="note_image">M</div>
           <div class="note_interaction">
-            <button><i class="fa-solid fa-plus"></i></button>
-            <button><i class="fa-solid fa-trash"></i></button>
+            <button><i class="add fa-solid fa-plus"></i></button>
+            <button class="delete">
+              <i class="fa-solid fa-trash"></i>
+            </button>
           </div>
         </div>
         <div class="line-break"></div>
@@ -34,7 +36,7 @@
             id="user-text"
             placeholder="Type your notes here"
           ></textarea>
-          <div class="note_down_interaction">
+          <div id="truncate" class="note_down_interaction">
             <i class="fa-solid fa-angle-up"></i>
           </div>
         </div>
