@@ -1,0 +1,70 @@
+/* Reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+/* main style */
+
+/* general elements */
+
+input {
+  list-style-type: none;
+  outline: none;
+  border: none;
+}
+
+body {
+  background-color: rgb(231, 237, 240);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 100vh;
+}
+
+body section {
+  max-width: 600px;
+  background-color: #fff;
+  padding: 2rem;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 5px;
+}
+
+section form {
+  padding: 0.7rem;
+  display: flex;
+  gap: 1.2rem;
+
+  border: 1px solid #1c263760;
+  border-radius: 2px;
+}
+
+/* * products  */
+
+.product {
+  width: 100%;
+  /* height: min-content; */
+  padding: 1rem 0;
+
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.image {
+  width: 80px;
+  aspect-ratio: 1;
+  border: 1px solid red;
+  border-radius: 5px;
+}
+
+.product .title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+}
