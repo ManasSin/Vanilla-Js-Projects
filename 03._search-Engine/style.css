@@ -94,7 +94,8 @@ section form {
 .image {
   width: 80px;
   height: 80px;
-  border-radius: 5px;
+  border-radius: 3px;
+  overflow: hidden;
 }
 
 .product .title {
