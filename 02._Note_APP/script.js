@@ -1,57 +1,212 @@
 "use strict";
+// ? list of things that are to do made
+// todo - core feature
+// * add notes from add note button and also from card within
+// * delete all button
+// * save notes data in local storage
+// * show saved notes even after reload
+// *
+// todo - extra fearturs
+// * random color generator
+// * first letter of title
+// * info will have data time while hovering
+
 // ! variable goes here
-const reload = document.querySelector("#reload");
-const addBtn = document.querySelector("#add-note");
-const deleteBtn = document.querySelector("#delete-all");
-const trashBtn = document.querySelectorAll(".delete");
+// * aside buttons
+const addNote = document.querySelector("nav #add-note"),
+  deleteAll = document.querySelector("nav #delete-all"),
+  reload = document.querySelector("nav #reload");
 
-let mainSection = document.querySelector("#main__section");
+// * add-notes variable
+const newNote = document.querySelector(".new-note"),
+  overlay = newNote.querySelector(".overlay"),
+  popup = newNote.querySelector("popup-notes"),
+  addBtn = newNote.querySelector("button"),
+  closeBtn = document.querySelector("#cross"),
+  titleText = newNote.querySelector("input"),
+  titleLabel = newNote.querySelector(".for-title"),
+  descLabel = newNote.querySelector(".for-desc"),
+  descText = newNote.querySelector("textarea"),
+  noteHeading = newNote.querySelector(".title");
 
-// * buttons inside cards
-const plusBtn = document.querySelector(".add");
-const truncate = document.querySelector("#truncate");
+console.log(titleLabel);
+// console.log(closeBtn);
 
-// ! functions goes here
-const addNotes = () => {
-  let noteCard = document.createElement("div");
-  // noteCard.className = "notes";
+// * main section variable
+const mainSection = document.querySelector("#main__section");
 
-  noteCard = `
-      <div class="notes">
-        <div class="note_top-bar">
-          <div class="note_image">M</div>
-          <div class="note_interaction">
-            <button class="add"><i class="fa-solid fa-plus"></i></button>
-            <button class="delete"><i class="fa-solid fa-trash"></i></button>
-          </div>
+// ! varibale that'll push the data intp local Storage
+const note = JSON.parse(localStorage.getItem("notes") || "[]");
+let isUpdate = false,
+  updateId;
+
+// ! extra functions
+
+const hexCode = `#${Math.floor(Math.random() * 2 ** 24)
+  .toString(16)
+  .padStart(6, "0")}`;
+
+// ! core function
+
+addNote.addEventListener("click", () => {
+  titleText.focus();
+  newNote.classList.add("show");
+  noteHeading.innerText = "Add new note";
+  addBtn.innerText = "Add this note !";
+  titleLabel.innerText = "Add Title";
+  descLabel.innerText = "Discribe your thoghts ✍️";
+  titleText.value = "";
+  descText.value = "";
+});
+
+closeBtn.addEventListener("click", () => {
+  isUpdate = false;
+  newNote.classList.remove("show");
+});
+
+overlay.addEventListener("click", () => {
+  newNote.classList.remove("show");
+});
+
+deleteAll.addEventListener("click", () => {
+  let confirmDelete = confirm("You are going to delete all notes..");
+  if (confirmDelete) note.splice(0, note.length);
+  localStorage.setItem("notes", JSON.stringify(note));
+  makeNote();
+});
+
+reload.addEventListener("click", () => {
+  window.location.reload();
+});
+
+// ! function of making notes
+
+function makeNote() {
+  if (!note) return;
+  document.querySelectorAll(".notes").forEach((note) => note.remove());
+  note.forEach((each, index) => {
+    let notes = `
+    <div class="notes">
+    <div class="note_top-bar">
+      <div class="note_image" style="background-color: ${each.randomColor};">${each.firstLetter}</div>
+      <div class="note_interaction">
+        <div class="info">
+          <button onclick="updateNote('${index}', '${each.title}', '${each.description}')"><i class="add fa-solid fa-pen"></i></button>
         </div>
-        <div class="line-break"></div>
-        <div class="note_content">
-          <textarea
-            name="text-area"
-            id="user-text"
-            placeholder="Type your notes here"
-          ></textarea>
-          <div id="truncate" class="note_down_interaction">
-            <i class="fa-solid fa-angle-up"></i>
-          </div>
+        <button onclick="deleteNote(${index})" class="delete">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+    </div>
+    <!-- <div class="line-break"></div> -->
+    <p class="note-title">${each.title}</p>
+    <div class="line-break"></div>
+    <div class="note_content">
+      <textarea
+        name="text-area"
+        id="user-text"
+        placeholder="Type your notes here"
+        disabled
+      >${each.description}</textarea>
+      <div class="note_down_interaction">
+        <i onmouseenter="showInfo(this)"  onmouseout="hideInfo(this)"  class="fa-solid fa-info"></i>
+        <div class="note-info">
+          <p>${each.date}</p>
         </div>
       </div>
-  `;
-  mainSection.appendChild(noteCard);
-
-  noteCard.querySelector(".delete").addEventListener("click", function () {
-    document.querySelector(".notes").remove();
+    </div>
+  </div>
+    `;
+    mainSection.innerHTML += notes;
   });
-};
+}
+makeNote();
 
-const randomColor = () => {};
+// ! function for notes within
+function updateNote(noteid, Texttitle, Textdes) {
+  // console.log(noteid, Texttitle, Textdes);
+  isUpdate = true;
+  updateId = noteid;
+  addNote.click();
+  noteHeading.innerText = "Update this note";
+  addBtn.innerText = "Save Updates 👍";
+  titleLabel.innerText = "Update Title";
+  descLabel.innerText = "Update Main content 💡";
+  titleText.value = Texttitle;
+  descText.value = Textdes;
+}
 
-const deleteNotes = () => {};
+// * delete note
+function deleteNote(noteID) {
+  let sure = confirm("You are deleting this note 😳");
+  if (sure) note.splice(noteID, 1);
+  localStorage.setItem("notes", JSON.stringify(note));
+  makeNote();
+}
 
-const saveNotes = () => {};
+// * show info
+function showInfo(ele) {
+  ele.nextElementSibling.classList.add("show");
+}
 
-const truncateArea = () => {};
+function hideInfo(ele) {
+  ele.nextElementSibling.classList.remove("show");
+}
 
-// ! interaction here
-addBtn.addEventListener("click", addNotes);
+// ! finally adding all to make a note
+// Months array;
+const Months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+addBtn.addEventListener("click", (e) => {
+  // Stoping the default behavior
+  e.preventDefault();
+
+  // taking user input and time , then adding it to an Array then pusing it to localstorage
+  if (titleText) {
+    let title = titleText.value;
+    let firstLetter = title[0].toUpperCase();
+    let desc = descText.value;
+    let today = new Date(),
+      day = today.getDate(),
+      month = today.getMonth(),
+      year = today.getFullYear(),
+      time = today.getHours() + "Hrs " + today.getMinutes() + "Mins";
+
+    const noteDate = {
+      title: `${title}`,
+      description: `${desc}`,
+      date: `${day}, ${Months[month]} , ${year}, ${time}`,
+      firstLetter: `${firstLetter}`,
+      randomColor: `${hexCode}`,
+    };
+
+    // ? putting all of this into array and storing it into local Storage ,
+
+    if (!isUpdate) {
+      note.push(noteDate); // adding when isUpdate is true
+    } else {
+      isUpdate = false;
+      note[updateId] = noteDate;
+    }
+
+    localStorage.setItem("notes", JSON.stringify(note));
+
+    closeBtn.click();
+    makeNote();
+  } else {
+    alert("please fill some data");
+  }
+});

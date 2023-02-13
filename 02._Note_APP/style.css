@@ -119,11 +119,102 @@ nav {
 }
 
 nav > button {
-  background-color: rgb(164, 195, 249);
+  list-style-type: none;
+  background-color: #fff;
+  /* padding: 50% 5%; */
+  flex-basis: 100%;
+  border: 2px solid #000;
 }
 
 nav > button:hover {
-  filter: drop-shadow(2px 2px 8px rgb(14, 31, 93, 0.3));
+  /* filter: drop-shadow(2px 2px 8px rgb(14, 31, 93, 0.3)); */
+  transform: translateX(-3px);
+  transform: translatey(-2px);
+  box-shadow: 3px 2px 0 0 #000;
+}
+
+.new-note {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: #0006;
+
+  transform: scale(0);
+  pointer-events: none;
+}
+
+.new-note.show {
+  transform: scale(1);
+  pointer-events: all;
+}
+
+.new-note .overlay {
+  width: 100%;
+  height: 100%;
+  background-color: #0002;
+  z-index: 2;
+}
+
+.popup-notes {
+  width: 300px;
+  height: fit-content;
+  padding: 10px 15px 25px;
+
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+  justify-content: space-around;
+
+  border: 1px solid #ccc;
+  border-radius: 1px;
+
+  z-index: 10;
+  background-color: #fff;
+
+  position: absolute;
+  top: 30%;
+  left: 30%;
+}
+
+.popup-notes .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#cross {
+  cursor: pointer;
+}
+
+.popup-notes .middle {
+  padding: 10px;
+}
+
+label {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.middle input {
+  width: 100%;
+  /* display: block; */
+}
+
+.middle textarea {
+  height: 90px;
+}
+
+.middle button {
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  padding: 5px;
+
+  cursor: pointer;
 }
 
 section {
@@ -132,23 +223,36 @@ section {
 
   width: 100%;
 
-  display: flex;
+  /* display: flex;
   flex-flow: row wrap;
   gap: 30px;
-  overflow-y: auto;
+  overflow-y: auto; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-rows: 280px;
+  gap: 1rem;
+
+  overflow: auto;
 }
 
 .notes {
-  width: 280px;
-  height: max-content;
+  max-width: 500px;
+  /* height: max-content; */
   padding: 10px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 
   display: flex;
   flex-flow: column;
 
   background-color: #fff;
   border: 1px solid #4d4d4d;
+}
+
+.notes:hover {
+  /* filter: drop-shadow(2px 2px 8px rgb(14, 31, 93, 0.3)); */
+  transform: translateX(-3px);
+  transform: translatey(-2px);
+  box-shadow: 3px 2px 0 0 #000;
 }
 
 .note_top-bar {
@@ -169,7 +273,7 @@ section {
   right: 5px;
 }
 
-.note_interaction > button {
+.note_interaction button {
   margin: 0;
   padding: 0 5px;
   border: none;
@@ -178,42 +282,82 @@ section {
 }
 
 .notes:is(:hover) .note_interaction {
-  display: block;
+  display: flex;
   transition-duration: 1s;
 }
 
 .note_image {
   flex: 1;
-  height: 80px;
+  height: 40px;
 
-  background-color: rgb(251, 97, 97);
+  /* background-color: rgb(251, 97, 97); */
 
-  border-radius: 10px;
+  border-radius: 5px;
 
-  font-size: 98px;
-  line-height: 75px;
+  font-size: 40px;
+  line-height: 35px;
   text-align: center;
   color: #fff;
 
   overflow: hidden;
+
+  transition: all 0.3s ease;
+
+  /* border-bottom: 10px solid linear-gradient(90deg, #000, #0003); */
+}
+
+.note_image:hover {
+  height: 80px;
+  line-height: 75px;
+  font-size: 98px;
+}
+
+input {
+  outline: none;
+  padding: 4px;
+  margin-block: 5%;
+  border: 1px solid #ccc;
+  /* border-radius: 5px; */
+
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .line-break {
   width: 100%;
   height: 2px;
-  margin: 5% 0;
+  margin: 10px 0;
   background-color: #4d4d4d40;
 }
 
 .note_content {
-  height: 100px;
+  height: 100%;
   position: relative;
+}
+
+.note-title {
+  margin-top: 5px;
+  text-transform: capitalize;
+  line-height: 32px;
 }
 
 textarea {
   width: 100%;
   height: 100%;
   resize: none;
+
+  padding: 5px;
+  outline: none;
+  border: 1px solid #ccc;
+  /* border-radius: 5px; */
+
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.notes input:focus,
+textarea:focus {
+  border: 1px solid #4d4d4d;
 }
 
 .note_down_interaction {
@@ -234,4 +378,28 @@ textarea {
 
 .notes:is(:hover) .note_down_interaction {
   display: grid;
+}
+
+.note-info {
+  padding: 10px 16px;
+  background-color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  width: 160px;
+  box-shadow: 0 0 5px #0002;
+  border-radius: 5px;
+
+  transform: scale(0);
+  transition: all 0.25s ease-out;
+  transform-origin: bottom right;
+
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  z-index: 1;
+}
+
+.note-info.show {
+  transform: scale(1);
 }

@@ -14,33 +14,75 @@
   </head>
   <body>
     <nav>
-      <button id="reload" class="nav-items">Reload</button>
-      <button id="add-note" class="nav-items">Add Notes</button>
-      <button id="delete-all" class="nav-items">Delete All</button>
+      <button id="reload" class="nav-items">
+        <i class="fa fa-rotate-right"></i>
+        Reload
+      </button>
+      <button id="add-note" class="nav-items">
+        <i class="fa fa-plus"></i>
+        Add Notes
+      </button>
+      <button id="delete-all" class="nav-items">
+        <i class="fa-solid fa-trash"></i>
+        Delete All
+      </button>
     </nav>
+
+    <div class="new-note">
+      <div class="overlay"></div>
+
+      <div class="popup-notes">
+        <div class="top">
+          <p class="title">Add new note</p>
+          <i id="cross" class="fa fa-xmark"></i>
+        </div>
+        <div class="middle">
+          <form action="#">
+            <div>
+              <label class="for-title" for="Title-Text">Add Title</label>
+              <input type="text" id="Title-Text" autocomplete="false" />
+            </div>
+            <div>
+              <label class="for-desc" for="desciption"
+                >Discribe your thoghts</label
+              >
+              <textarea name="desciption" id="desciption"></textarea>
+            </div>
+            <button>Add this note !</button>
+          </form>
+        </div>
+      </div>
+    </div>
     <section id="main__section">
-      <div class="notes">
+      <!-- <div class="notes">
         <div class="note_top-bar">
           <div class="note_image">M</div>
           <div class="note_interaction">
-            <button><i class="add fa-solid fa-plus"></i></button>
+            <div class="info">
+              <button><i class="add fa-solid fa-pen"></i></button>
+            </div>
             <button class="delete">
               <i class="fa-solid fa-trash"></i>
             </button>
           </div>
         </div>
+        <p class="note-title"></p>
         <div class="line-break"></div>
         <div class="note_content">
           <textarea
             name="text-area"
             id="user-text"
             placeholder="Type your notes here"
+            disabled
           ></textarea>
-          <div id="truncate" class="note_down_interaction">
+          <div class="note_down_interaction">
             <i class="fa-solid fa-angle-up"></i>
           </div>
+          <div class="note-info">
+            <p>date</p>
+          </div>
         </div>
-      </div>
+      </div> -->
     </section>
   </body>
 </html>
