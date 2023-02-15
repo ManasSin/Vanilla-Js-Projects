@@ -29,7 +29,7 @@ const newNote = document.querySelector(".new-note"),
   descText = newNote.querySelector("textarea"),
   noteHeading = newNote.querySelector(".title");
 
-console.log(titleLabel);
+// console.log(titleLabel);
 // console.log(closeBtn);
 
 // * main section variable
@@ -42,9 +42,11 @@ let isUpdate = false,
 
 // ! extra functions
 
-const hexCode = `#${Math.floor(Math.random() * 2 ** 24)
-  .toString(16)
-  .padStart(6, "0")}`;
+function randomHex() {
+  return `#${Math.floor(Math.random() * 2 ** 24)
+    .toString(16)
+    .padStart(6, "0")}`;
+}
 
 // ! core function
 
@@ -96,6 +98,9 @@ function makeNote() {
         <button onclick="deleteNote(${index})" class="delete">
           <i class="fa-solid fa-trash"></i>
         </button>
+        <button onclick="changeColor(\`${index}\`)" class="change-color">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
       </div>
     </div>
     <!-- <div class="line-break"></div> -->
@@ -134,6 +139,14 @@ function updateNote(noteid, Texttitle, Textdes) {
   descLabel.innerText = "Update Main content 💡";
   titleText.value = Texttitle;
   descText.value = Textdes;
+}
+
+// ! random color
+
+function changeColor(index) {
+  note[index].randomColor = randomHex();
+  localStorage.setItem("notes", JSON.stringify(note));
+  makeNote();
 }
 
 // * delete note
@@ -190,7 +203,7 @@ addBtn.addEventListener("click", (e) => {
       description: `${desc}`,
       date: `${day}, ${Months[month]} , ${year}, ${time}`,
       firstLetter: `${firstLetter}`,
-      randomColor: `${hexCode}`,
+      randomColor: `${randomHex()}`,
     };
 
     // ? putting all of this into array and storing it into local Storage ,
