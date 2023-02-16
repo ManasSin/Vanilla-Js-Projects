@@ -1,5 +1,5 @@
 const input = document.getElementById("inputBox");
-const countryNAme = document.getElementById("countryName");
+const countryName = document.getElementById("countryName");
 const stateName = document.getElementById("stateName");
 const cityName = document.getElementById("cityName");
 const humidity = document.getElementById("humidity");
@@ -7,6 +7,8 @@ const windSpeed = document.getElementById("windSpeed");
 const Temp = document.getElementById("Temp");
 const logoImage = document.getElementById("logoImage");
 const weatherStatus = document.getElementById("weatherStatus");
+
+//! api key = da0d03f0a14044d3aa6110017231102
 
 // now function
 const getData = async (eve) => {

@@ -1,9 +1,162 @@
 /* css reset */
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@300;500;700&display=swap");
+
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+    2. Remove default margin
+  */
 * {
   margin: 0;
-  padding: 0;
-  outline: 0;
-  box-sizing: border-box;
+}
+/*
+    3. Allow percentage-based heights in the application
+  */
+html,
+body {
+  height: 100%;
+}
+/*
+    Typographic tweaks!
+    4. Add accessible line-height
+    5. Improve text rendering
+  */
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+    6. Improve media defaults
+  */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+    7. Remove built-in form typography styles
+  */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+    8. Avoid text overflows
+  */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/*
+    9. Create a root stacking context
+  */
+#root,
+#__next {
+  isolation: isolate;
+}
+
+:root {
+  /* * images from out-source in variable */
+  --front-screen-image-background: url("https://images.unsplash.com/photo-1436891620584-47fd0e565afb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80");
+
+  --cloudyDay-screen-image-background: url("https://images.unsplash.com/photo-1615552714321-dca9935c0981?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80");
+
+  --sunnyDay-screen-image-background: url("https://images.unsplash.com/photo-1541119638723-c51cbe2262aa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3VubnklMjBkYXl8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60");
+
+  --clearDay-screen-image-background: url("https://images.unsplash.com/photo-1570630819727-b32fda434a7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80");
+
+  --rainyDay-screen-image-background: url("https://images.unsplash.com/photo-1526516417830-11570179d642?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1774&q=80");
+
+  /* * color variable */
+
+  /* ? text color */
+  --text-white: #fff;
+  --text-blue: #3dabf9;
+  --text-black: #000;
+
+  /* ? element color */
+  --black-primary: #000;
+  --black-secondry: #4d4d4d40;
+  --white-primary: #fff;
+  --white-secondry: #fff4;
+  --blue-primary: #2482b1;
+  --blue-secondry: #2482b140;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+
+  /* * font variable */
+
+  /* ? font */
+  --title-font: normal 700 48px/73px "Mukta", helvetica;
+  --heading-bold: normal 500 24px/32px "Mukta", helvetica;
+  --heading-light: normal 300 22px/30px "Mukta", helvetica;
+  --normal-bold: normal 500 18px/26px "Mukta", helvetica;
+  --normal-light: normal 300 16px/24px "Mukta", helvetica;
+
+  /* ? letter spacing */
+  --letter-space-large: 0.025em;
+  --letter-space-small: -0.01em;
+
+  /* * space variable */
+
+  --gap-8: 8rem;
+  --gap-7: 7rem;
+  --gap-5: 5rem;
+  --gap-4: 4rem;
+  --gap-3: 3rem;
+  --gap-2: 2rem;
+  --gap-1: 1rem;
+  --gap-xs: 0.5rem;
+
+  /* * border radius */
+
+  --radius-ronded: 25%;
+  --radius-big: 10px;
+  --radius-small: 8px;
+
+  /* * card size */
+}
+
+/* ! animation goes here */
+
+@keyframes load {
+  from {
+    /* transform: scale(0.3); */
+    opacity: 0;
+  }
+
+  to {
+    /* transform: scale(1); */
+    opacity: 1;
+  }
+}
+
+/* ! main css */
+
+.main-container {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-flow: column;
+  width: 50%;
+  height: 50%;
+  align-items: center;
 }
 
 body {
@@ -11,18 +164,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-/* designing the weather app container */
-.container {
-  width: 600px;
-  border: 2px solid black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 25px;
-  padding: 15px;
+  background-image: var(--front-screen-image-background);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(5px);
+
+  animation: load 1s ease-out 0ms 1 normal none;
 }
 
 /* designing the search area */
