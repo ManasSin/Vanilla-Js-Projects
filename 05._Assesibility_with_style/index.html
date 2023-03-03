@@ -8,10 +8,35 @@
     <link rel="shortcut icon" href="./game-over.png" type="image/x-icon" />
     <script src="./script.js" defer></script>
     <title>Popup Art</title>
+    <!-- the props -->
   </head>
   <body>
-    <button onclick="themeSwitcher()">Theme toggle button</button>
-    <h1>let's see the magic</h1>
-    <p>this is awesome</p>
+    <section class="submit-form">
+      <h1>You can give me what i want</h1>
+
+      <div class="profile">
+        <figure>
+          <img src="https://randomuser.me/api/portraits/med/men/75.jpg" />
+          <figcaption>Random person</figcaption>
+        </figure>
+
+        <p class="profile-info">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur,
+          sit!
+        </p>
+
+        <button type="button" class="blob">i</button>
+      </div>
+      <button onclick="changeStateOpen()">show me somethings</button>
+      <div class="blob"></div>
+      <dialog close>
+        <form method="dialog">
+          <input type="file" name="letsnot" id="nada" />
+          <button onclick="changeStateClose()" type="button">close</button>
+          <button onclick="changeStateClose()" type="reset">cancel</button>
+          <button onclick="checkthenSubmit()" type="submit">submit</button>
+        </form>
+      </dialog>
+    </section>
   </body>
 </html>
